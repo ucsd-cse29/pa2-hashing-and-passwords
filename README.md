@@ -1,5 +1,4 @@
-
-## Hashing and Passwords
+# PA1 - Hashing and Passwords: Due 10/24 at 10pm
 
 [Cryptographic hash functions](https://en.wikipedia.org/wiki/Cryptographic_hash_function) take an input of arbitrary length and produces a fixed length output. The special features are that the outputs are *deterministic* (the same input always generates the same output) and yet the outputs are apparently “random” – two similar inputs are likely to produce very different outputs, and it's difficult to determine the input by looking at the ouput.
 
@@ -10,6 +9,9 @@ That is, let's say we have access to a user's password *hash* only. Can we figur
 
 In some cases, password cracking can [exploit the structure](https://en.wikipedia.org/wiki/MD5#Security) of a hash function; this is a topic for a cryptography class. In our case, we will take a more brute-force approach: trying variations on existing known passwords, under the assumption that [many passwords are easy to guess](https://en.wikipedia.org/wiki/List_of_the_most_common_passwords).
 
+## Recommended Platform
+
+This PA should be completed on the `ieng6` server. Refer [this](https://ucsd-cse29.github.io/fa24/week1/index.html#logging-into-ieng6) section in Week 1's Lab to login to your account on `ieng6` and working with files on the server.
 
 ## Overall Task
 
@@ -83,7 +85,7 @@ Did not find a matching password
 ```
 
 To help testing your PA, we are providing you with a file containing 3 million real paintext passwords famously found a data breach of the [RockYou
-social network](https://en.wikipedia.org/wiki/RockYou) in 2009. You can use the password file by reading it into `pwcrack` using
+social network](https://en.wikipedia.org/wiki/RockYou) in 2009. You can use the password file present in the `ieng6` servers by reading it into `pwcrack` using
 the following commandline.
 ```
 $./pwcrack < /home/linux/ieng6/cs29fa24/pa2/rockyou_clean.txt
@@ -114,6 +116,7 @@ The `md_buf` argument is where the hash gets stored, and it is assumed to be at 
 Here's a short code snippet that shows how to use it:
 
 ```
+#include <stdint.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stdio.h>
