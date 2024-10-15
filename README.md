@@ -1,4 +1,4 @@
-# PA2 - Hashing and Passwords: Due 10/24 at 10pm
+# PA2 - Hashing and Passwords: Due 10/25 at 10pm
 
 [Cryptographic hash functions](https://en.wikipedia.org/wiki/Cryptographic_hash_function) take an input of arbitrary length and produces a fixed length output. The special features are that the outputs are *deterministic* (the same input always generates the same output) and yet the outputs are apparently “random” – two similar inputs are likely to produce very different outputs, and it's difficult to determine the input by looking at the ouput.
 
