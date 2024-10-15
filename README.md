@@ -74,7 +74,7 @@ Found password: SHA256(seCret) = a2c3b02cb22af83d6d1ead1d4e18d916599be7c2ef2f017
 Note that we only consider single-character changes when trying 
 uppercase/lowercase variants of the guesses (i.e. we DON'T try all possible 
 capitalizations of the string): In the example below, the correct password is 
-NOT found because going from `SECRET` to `seCret` would require 4 characters to be changed.
+NOT found because going from `SECRET` to `seCret` would require 5 characters to be changed.
 
 ```
 $ ./pwcrack a2c3b02cb22af83d6d1ead1d4e18d916599be7c2ef2f017169327df1f7c844fd
@@ -178,7 +178,7 @@ Given two hex characters in ASCII (0-9, a-f) representing a two-digit hexadecima
 
 
 ```
-assert(hex_to_byte('c', '8') == 201);
+assert(hex_to_byte('c', '8') == 200);
 assert(hex_to_byte('0', '3') == 3);
 assert(hex_to_byte('0', 'a') == 10);
 assert(hex_to_byte('1', '0') == 16);
