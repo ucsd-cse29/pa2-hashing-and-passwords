@@ -187,14 +187,14 @@ assert(hex_to_byte('1', '0') == 16);
 #### `hexstr_to_hash`
 
 ```
-void hexstr_to_hash(unsigned char hexstr[], char hash[32])
+void hexstr_to_hash(char hexstr[], unsigned char hash[32])
 ```
 
 Given 64 hex characters in ASCII (e.g. user input), convert it to a 32-byte array corresponding to the hex values. Assume the first 64 bytes (exactly) of hex contain the input data.
 
 ```
 char hexstr[64] = "a2c3b02cb22af83d6d1ead1d4e18d916599be7c2ef2f017169327df1f7c844fd";
-char hash[32];
+unsigned char hash[32];
 hexstr_to_hash(hexstr, hash);
 // hash should now contain { 0xa2, 0xc3, 0xb0, 0x2c, ... }
 ```
@@ -208,10 +208,10 @@ For example:
 
 ```
 int main(int argc, char** argv) {
-  char hash[32];
+  unsigned char hash[32];
   hexstr_to_hash(argv[1], hash);
   printf("User input as hash: \n");
-  // print out hash (you can use our main method from the SHA256 example
+  // print out hash (you can use our main method from the SHA256 example)
 }
 ```
 
@@ -242,7 +242,7 @@ int main(int argc, char** argv) {
     test_hex_to_byte();
     test_hexstr_to_hash();
   }
-  char hash[32];
+  unsigned char hash[32];
   hexstr_to_hash(argv[1], hash);
   // ... other work in main ...
 }
@@ -258,11 +258,11 @@ Given a password as a C string and a SHA256 hash as an array of bytes, check the
 
 
 ```
-int8_t check_password(char password[], char given_hash[32])
+int8_t check_password(char password[], unsigned char given_hash[32])
 
 // Example:
 // char hash_as_hexstr[] = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"; // SHA256 hash for "password"
-// char given_hash[32];
+// unsigned char given_hash[32];
 // hexstr_to_hash(hash_as_hexstr, given_hash);
 // assert(check_password("password", given_hash) == 1);
 // assert(check_password("wrongpass", given_hash) == 0);
@@ -300,7 +300,7 @@ For testing milestone 2, using `assert`s in a test function (as suggested in Mil
 #### `crack_password`
 
 ```
-int8_t crack_password(char password[], char given_hash[])
+int8_t crack_password(char password[], unsigned char given_hash[])
 ```
 
 Given a password string and hash, attempt to match the given password and all variations of the given password made by uppercasing or lowercasing a single ASCII character.
@@ -310,7 +310,7 @@ Returns `1` on match and `0` if no match. In addition, if `1` is returned, the `
 ```
 // char password[] = "paSsword";
 // char hash_as_hexstr[] = "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8"; // SHA256 hash of "password"
-// char given_hash[32];
+// unsigned char given_hash[32];
 // hexstr_to_hash(hash_as_hexstr, given_hash);
 // int8_t match = crack_password(password, given_hash);
 // assert(match == 1);
