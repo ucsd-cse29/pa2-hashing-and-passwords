@@ -230,7 +230,7 @@ void test_hex_to_byte() {
 }
 void test_hexstr_to_hash() {
   char hexstr[64] = "a2c3b02cb22af83d6d1ead1d4e18d916599be7c2ef2f017169327df1f7c844fd";
-  char hash[32];
+  unsigned char hash[32];
   hexstr_to_hash(hexstr, hash);
   for(int i = 0; i < 32; i += 1) { ... print something about hash ... }
   assert(hash[0] == 0xa2);
