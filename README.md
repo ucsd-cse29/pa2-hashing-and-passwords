@@ -89,12 +89,12 @@ To help testing your PA, we are providing you with a file containing 3 million r
 social network](https://en.wikipedia.org/wiki/RockYou) in 2009. You can use the password file present in the `ieng6` servers by reading it into `pwcrack` using
 the following commandline if you're in Joe's section:
 ```
-$./pwcrack < /home/linux/ieng6/cs29fa24/pa2/rockyou_clean.txt
+$./pwcrack < a2c3b02cb22af83d6d1ead1d4e18d916599be7c2ef2f017169327df1f7c844fd /home/linux/ieng6/cs29fa24/pa2/rockyou_clean.txt
 ```
 
 and the following command if you're in Aaron's section:
 ```
-$./pwcrack < /home/linux/ieng6/cs29fa24b/pa2/rockyou_clean.txt
+$./pwcrack < a2c3b02cb22af83d6d1ead1d4e18d916599be7c2ef2f017169327df1f7c844fd /home/linux/ieng6/cs29fa24b/pa2/rockyou_clean.txt
 ```
 
 
