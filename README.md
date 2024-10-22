@@ -233,7 +233,7 @@ A way to organize this in your code could be to write individual test functions,
 #include <assert.h>
 
 void test_hex_to_byte() {
-  assert(hex_to_byte('c', '8') == 201)
+  assert(hex_to_byte('c', '8') == 200)
   ...
 }
 void test_hexstr_to_hash() {
