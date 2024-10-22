@@ -87,10 +87,16 @@ Did not find a matching password
 
 To help testing your PA, we are providing you with a file containing 3 million real paintext passwords famously found a data breach of the [RockYou
 social network](https://en.wikipedia.org/wiki/RockYou) in 2009. You can use the password file present in the `ieng6` servers by reading it into `pwcrack` using
-the following commandline.
+the following commandline if you're in Joe's section:
 ```
 $./pwcrack < /home/linux/ieng6/cs29fa24/pa2/rockyou_clean.txt
 ```
+
+and the following command if you're in Aaron's section:
+```
+$./pwcrack < /home/linux/ieng6/cs29fa24b/pa2/rockyou_clean.txt
+```
+
 
 Note: these are real human-generated passwords, so they may contain profane words (and offensive concepts). We are providing a
 censored version of the RockYou password list. Our filtering methodology was to remove any passwords that matched a widely-used 2,800 profane
