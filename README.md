@@ -12,6 +12,8 @@ In some cases, password cracking can [exploit the structure](https://en.wikipedi
 ## Getting Started
 To get started, visit the [Github Classroom](https://classroom.github.com/a/Lo9vRhLG) assignment link. Select your username from the list (or if you don't see it, you can skip and use your Github username). A repository will be created for you to use for your work. This PA should be completed on the `ieng6` server. Refer [this](https://ucsd-cse29.github.io/fa24/week1/index.html#logging-into-ieng6) section in Week 1's Lab for instructions on logging in to your account on `ieng6` and working with files on the server.
 
+**Note** - The autograder uses the C11 standard of the C programming language.
+
 ## Overall Task
 
 We'll start by describing the overall task and goal so it's clear where you're going.
