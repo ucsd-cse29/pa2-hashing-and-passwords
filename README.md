@@ -1,4 +1,51 @@
-# PA2 - Hashing and Passwords: Due 10/25 at 10pm - [Github Classroom Link](https://classroom.github.com/a/Lo9vRhLG)
+# PA2 - Hashing and Passwords: Resubmission Due 11/11 at 10:10pm - [Github Classroom Link](https://classroom.github.com/a/Lo9vRhLG)
+
+### If you want to resubmit PA2, please read this section carefully. You need to pass all the tests in the original PA2, while also implementing an extra functionality and answering a new design question described below.
+
+Write the program `pwcrack` such that it should, for each password:
+
+- Check if the SHA256 hash of the potential password matches the given hash
+- Check if the SHA256 hash of the potential password with each of its ASCII characters
+  uppercased or lowercased matches the given hash
+- Check if the SHA256 hash of the potential password with each of its numerical digits replaced by all possible number digits (considering only single digit changes) matches the given hash [NEW!]
+The numerical and character modification don't happen both at the same time.
+
+**Clarifications**
+If `secRet112` is a potential password:
+- We will NOT check `SecRet113` as it would combine changing the case of a character and replacing numerical digit
+- `Secret112` is NOT a valid variation to check as it modifies the case of two characters at the same time
+- `secRet123` is NOT a valid variation to check as it modifies two numerical digits at the same time
+- `secret112`, `sEcRet112`, `secRet212`, etc. are some valid variations to hash and check for a match
+
+For example,
+`secret112` has a SHA256 hash of `93d2cdc479f3c963f6564bbda9deffa98004e88a5306cd8c434b641f08a8e090`
+
+```
+$ ./pwcrack 93d2cdc479f3c963f6564bbda9deffa98004e88a5306cd8c434b641f08a8e090
+NeverGuessMe!!
+secret
+secret012
+Found password: SHA256(secret112) = 93d2cdc479f3c963f6564bbda9deffa98004e88a5306cd8c434b641f08a8e090
+$ ./pwcrack 93d2cdc479f3c963f6564bbda9deffa98004e88a5306cd8c434b641f08a8e090
+NeverGuessMe!!
+secret
+secret222
+<Press Ctrl-D for end of input>
+Did not find a matching password
+```
+
+### You will also need to answer the following updated DESIGN question in your resubmission:
+
+Consider the following run of `pwcrack`:
+```
+$ ./pwcrack a2c3b02cb22af83d6d1ead1d4e18d916599be7c2ef2f017169327df1f7c844fd
+secRet112
+<Press Ctrl-D for end of input>
+Did not find a matching password
+```
+Based on the specifications of the PA - how many possible password variations will be hashed and tested for a match?
+<hr>
+
 
 [Cryptographic hash functions](https://en.wikipedia.org/wiki/Cryptographic_hash_function) take an input of arbitrary length and produces a fixed length output. The special features are that the outputs are *deterministic* (the same input always generates the same output) and yet the outputs are apparently “random” – two similar inputs are likely to produce very different outputs, and it's difficult to determine the input by looking at the ouput.
 
