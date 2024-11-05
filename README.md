@@ -7,10 +7,12 @@ Write the program `pwcrack` such that it should, for each password:
 - Check if the SHA256 hash of the potential password matches the given hash
 - Check if the SHA256 hash of the potential password with each of its ASCII characters
   uppercased or lowercased matches the given hash
-- Check if the SHA256 hash of the potential password with each of its numerical digits replaced by all possible number digits (considering only single digit changes) matches the given hash [NEW!]
+- Check if the SHA256 hash of the potential password with each of its numerical digits replaced by all possible number digits (considering only single digit changes) matches the given hash **[NEW!]**
+
 The numerical and character modification don't happen both at the same time.
 
-**Clarifications**
+#### Clarifications
+
 If `secRet112` is a potential password:
 - We will NOT check `SecRet113` as it would combine changing the case of a character and replacing numerical digit
 - `Secret112` is NOT a valid variation to check as it modifies the case of two characters at the same time
