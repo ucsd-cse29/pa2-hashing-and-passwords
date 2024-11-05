@@ -4,22 +4,22 @@
 
 Implement `pwcrack` as originally described below. Also update `pwcrack` to check if the SHA256 hash of the potential password with each of its numeric digits `'0'-'9'` replaced by all possible numberic digits `'0'-'9'` (considering only single digit changes) matches the given hash.
 
-As before, only one character change at a time is tested, so if `secRet112` is a potential password:
-- This does NOT check `SecRet113` as it would combine changing the case of a character and replacing a digit
-- `Secret112` is NOT a valid variation to check as it modifies the case of two characters at the same time
-- `secRet123` is NOT a valid variation to check as it modifies two digits at the same time
-- `secret112`, `sEcRet112`, `secRet212`, etc. are some valid variations to hash and check for a match
+As before, only one character change at a time is tested, so if `Secret111` is a potential password:
+- This does NOT check `secret101` as it would combine changing the case of a character and replacing a digit
+- `SeCreT111` is NOT a valid variation to check as it modifies the case of two characters at the same time
+- `Secret123` is NOT a valid variation to check as it modifies two digits at the same time
+- `secret111`, `Secret112`, `SecreT111`, etc. are some valid variations to hash and check for a match
 
 For example,
-`secret112` has a SHA256 hash of `93d2cdc479f3c963f6564bbda9deffa98004e88a5306cd8c434b641f08a8e090`
+`Secret112` has a SHA256 hash of `b54051d1abdba8656126f85f96d9270283d34b1cb8787b78c50646d9eb4a502d`
 
 ```
-$ ./pwcrack 93d2cdc479f3c963f6564bbda9deffa98004e88a5306cd8c434b641f08a8e090
+$ ./pwcrack b54051d1abdba8656126f85f96d9270283d34b1cb8787b78c50646d9eb4a502d
 NeverGuessMe!!
-secret
-secret012
-Found password: SHA256(secret112) = 93d2cdc479f3c963f6564bbda9deffa98004e88a5306cd8c434b641f08a8e090
-$ ./pwcrack 93d2cdc479f3c963f6564bbda9deffa98004e88a5306cd8c434b641f08a8e090
+Secret
+Secret111
+Found password: SHA256(Secret112) = b54051d1abdba8656126f85f96d9270283d34b1cb8787b78c50646d9eb4a502d
+$ ./pwcrack b54051d1abdba8656126f85f96d9270283d34b1cb8787b78c50646d9eb4a502d
 NeverGuessMe!!
 secret
 secret222
@@ -31,9 +31,9 @@ Did not find a matching password
 
 Consider the following run of your updated `pwcrack`:
 ```
-$ ./pwcrack a2c3b02cb22af83d6d1ead1d4e18d916599be7c2ef2f017169327df1f7c844fd
+$ ./pwcrack b54051d1abdba8656126f85f96d9270283d34b1cb8787b78c50646d9eb4a502d
 secret118
-secret112
+secret111
 <Press Ctrl-D for end of input>
 Did not find a matching password
 ```
