@@ -32,17 +32,15 @@ Did not find a matching password
 Consider the following run of your updated `pwcrack`:
 ```
 $ ./pwcrack a2c3b02cb22af83d6d1ead1d4e18d916599be7c2ef2f017169327df1f7c844fd
-secRet112
+secret118
 secret112
 <Press Ctrl-D for end of input>
 Did not find a matching password
 ```
 
 - How many password variations were hashed and tested for a match?
-- How many times was the same password hashed and checked?
-- Are there ways we could avoid this duplicate work when multiple similar passwords are part of the input?
-
-
+- How many duplicate password variations were hashed and checked?
+- What are ways you might change your implementation to avoid this repeated and redundant work?
 
 <hr>
 
