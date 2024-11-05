@@ -2,21 +2,12 @@
 
 ### If you want to resubmit PA2, please read this section carefully. You need to pass all the tests in the original PA2, while also implementing an extra functionality and answering a new design question described below.
 
-Write the program `pwcrack` such that it should, for each password:
+Implement `pwcrack` as originally described below. Also update `pwcrack` to check if the SHA256 hash of the potential password with each of its numeric digits `'0'-'9'` replaced by all possible numberic digits `'0'-'9'` (considering only single digit changes) matches the given hash.
 
-- Check if the SHA256 hash of the potential password matches the given hash
-- Check if the SHA256 hash of the potential password with each of its ASCII characters
-  uppercased or lowercased matches the given hash
-- Check if the SHA256 hash of the potential password with each of its numerical digits replaced by all possible number digits (considering only single digit changes) matches the given hash **[NEW!]**
-
-The numerical and character modification don't happen both at the same time.
-
-#### Clarifications
-
-If `secRet112` is a potential password:
-- We will NOT check `SecRet113` as it would combine changing the case of a character and replacing numerical digit
+As before, only one character change at a time is tested, so if `secRet112` is a potential password:
+- This does NOT check `SecRet113` as it would combine changing the case of a character and replacing a digit
 - `Secret112` is NOT a valid variation to check as it modifies the case of two characters at the same time
-- `secRet123` is NOT a valid variation to check as it modifies two numerical digits at the same time
+- `secRet123` is NOT a valid variation to check as it modifies two digits at the same time
 - `secret112`, `sEcRet112`, `secRet212`, etc. are some valid variations to hash and check for a match
 
 For example,
@@ -38,14 +29,21 @@ Did not find a matching password
 
 ### You will also need to answer the following updated DESIGN question in your resubmission:
 
-Consider the following run of `pwcrack`:
+Consider the following run of your updated `pwcrack`:
 ```
 $ ./pwcrack a2c3b02cb22af83d6d1ead1d4e18d916599be7c2ef2f017169327df1f7c844fd
 secRet112
+secret112
 <Press Ctrl-D for end of input>
 Did not find a matching password
 ```
-Based on the specifications of the PA - how many possible password variations will be hashed and tested for a match?
+
+- How many password variations were hashed and tested for a match?
+- How many times was the same password hashed and checked?
+- Are there ways we could avoid this duplicate work when multiple similar passwords are part of the input?
+
+
+
 <hr>
 
 
