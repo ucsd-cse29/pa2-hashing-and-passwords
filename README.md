@@ -1,4 +1,4 @@
-# PA2 - Hashing and Passwords: Resubmission Due 11/11 at 10:10pm - [Github Classroom Link](https://classroom.github.com/a/Lo9vRhLG)
+# PA2 - Hashing and Passwords: Resubmission Due 11/13 at 10:10pm - [Github Classroom Link](https://classroom.github.com/a/Lo9vRhLG)
 
 ### If you want to resubmit PA2, please read this section carefully. You need to pass all the tests in the original PA2, while also implementing an extra functionality and answering a new design question described below.
 
