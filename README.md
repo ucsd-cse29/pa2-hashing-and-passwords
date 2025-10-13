@@ -1,61 +1,17 @@
-# PA2 - Hashing and Passwords: Resubmission Due 11/13 at 10:10pm - [Github Classroom Link](https://classroom.github.com/a/Lo9vRhLG)
+# PA2 - Hashing and Passwords: Due 10/23 at 11:59pm - [Github Classroom Link](https://classroom.github.com/a/Lo9vRhLG)
 
-### If you want to resubmit PA2, please read this section carefully. You need to pass all the tests in the original PA2, while also implementing an extra functionality and answering a new design question described below.
-
-Implement `pwcrack` as originally described below. Also update `pwcrack` to check if the SHA256 hash of the potential password with each of its numeric digits `'0'-'9'` replaced by all possible numberic digits `'0'-'9'` (considering only single digit changes) matches the given hash.
-
-As before, only one character change at a time is tested, so if `Secret111` is a potential password:
-- This does NOT check `secret101` as it would combine changing the case of a character and replacing a digit
-- `SeCreT111` is NOT a valid variation to check as it modifies the case of two characters at the same time
-- `Secret123` is NOT a valid variation to check as it modifies two digits at the same time
-- `secret111`, `Secret112`, `SecreT111`, etc. are some valid variations to hash and check for a match
-
-For example,
-`Secret112` has a SHA256 hash of `b54051d1abdba8656126f85f96d9270283d34b1cb8787b78c50646d9eb4a502d`
-
-```
-$ ./pwcrack b54051d1abdba8656126f85f96d9270283d34b1cb8787b78c50646d9eb4a502d
-NeverGuessMe!!
-Secret
-Secret111
-Found password: SHA256(Secret112) = b54051d1abdba8656126f85f96d9270283d34b1cb8787b78c50646d9eb4a502d
-$ ./pwcrack b54051d1abdba8656126f85f96d9270283d34b1cb8787b78c50646d9eb4a502d
-NeverGuessMe!!
-secret
-secret222
-<Press Ctrl-D for end of input>
-Did not find a matching password
-```
-
-### You will also need to answer the following updated DESIGN question in your resubmission:
-
-Consider the following run of your updated `pwcrack`:
-```
-$ ./pwcrack b54051d1abdba8656126f85f96d9270283d34b1cb8787b78c50646d9eb4a502d
-secret118
-secret111
-<Press Ctrl-D for end of input>
-Did not find a matching password
-```
-
-- How many password variations were hashed and tested for a match?
-- How many duplicate password variations were hashed and checked?
-- What are ways you might change your implementation to avoid this repeated and redundant work?
-
-<hr>
-
-
-[Cryptographic hash functions](https://en.wikipedia.org/wiki/Cryptographic_hash_function) take an input of arbitrary length and produces a fixed length output. The special features are that the outputs are *deterministic* (the same input always generates the same output) and yet the outputs are apparently “random” – two similar inputs are likely to produce very different outputs, and it's difficult to determine the input by looking at the ouput.
+[Cryptographic hash functions](https://en.wikipedia.org/wiki/Cryptographic_hash_function) take an input of arbitrary length and produces a fixed length output. The special features are that the outputs are _deterministic_ (the same input always generates the same output) and yet the outputs are apparently “random” – two similar inputs are likely to produce very different outputs, and it's difficult to determine the input by looking at the ouput.
 
 A common application of hashing is in storing passwords. Many systems store only the hash of a user's password along with their username. This ensures that even if someone gains access to the stored data, users' actual passwords are not exposed. When a user types in a password on such a system, the password handling software grants access if the hash value generated from the user's entry matches the hash stored in the password database.
 
-We said above that it is *difficult* to determine an input given an output. [Password cracking](https://en.wikipedia.org/wiki/Password_cracking) is a family of techniques for accomplishing this difficult (but possible!) task.
-That is, let's say we have access to a user's password *hash* only. Can we figure out their password? We could then use it to log in, and it may also be shared across their accounts which we could also access.
+We said above that it is _difficult_ to determine an input given an output. [Password cracking](https://en.wikipedia.org/wiki/Password_cracking) is a family of techniques for accomplishing this difficult (but possible!) task.
+That is, let's say we have access to a user's password _hash_ only. Can we figure out their password? We could then use it to log in, and it may also be shared across their accounts which we could also access.
 
 In some cases, password cracking can [exploit the structure](https://en.wikipedia.org/wiki/MD5#Security) of a hash function; this is a topic for a cryptography class. In our case, we will take a more brute-force approach: trying variations on existing known passwords, under the assumption that [many passwords are easy to guess](https://en.wikipedia.org/wiki/List_of_the_most_common_passwords).
 
 ## Getting Started
-To get started, visit the [Github Classroom](https://classroom.github.com/a/Lo9vRhLG) assignment link. Select your username from the list (or if you don't see it, you can skip and use your Github username). A repository will be created for you to use for your work. This PA should be completed on the `ieng6` server. Refer [this](https://ucsd-cse29.github.io/fa24/week1/index.html#logging-into-ieng6) section in Week 1's Lab for instructions on logging in to your account on `ieng6` and working with files on the server.
+
+To get started, visit the [Github Classroom](https://classroom.github.com/a/Lo9vRhLG) assignment link. Select your username from the list (or if you don't see it, you can skip and use your Github username). A repository will be created for you to use for your work. This PA should be completed on the `ieng6` server. Refer [this](https://ucsd-cse29.github.io/fa25/week1/lab1.html#logging-into-ieng6) section in Week 1's Lab for instructions on logging in to your account on `ieng6` and working with files on the server.
 
 **Note** - The autograder uses the C11 standard of the C programming language.
 
@@ -82,7 +38,7 @@ If a matching password is found, the program should print
 Found password: SHA256(<matching password>) = <hash>
 ```
 
-If a matching password is *not* found, the program should print:
+If a matching password is _not_ found, the program should print:
 
 ```
 Did not find a matching password
@@ -118,9 +74,9 @@ $ ./pwcrack a2c3b02cb22af83d6d1ead1d4e18d916599be7c2ef2f017169327df1f7c844fd < g
 Found password: SHA256(seCret) = a2c3b02cb22af83d6d1ead1d4e18d916599be7c2ef2f017169327df1f7c844fd
 ```
 
-Note that we only consider single-character changes when trying 
-uppercase/lowercase variants of the guesses (i.e. we DON'T try all possible 
-capitalizations of the string): In the example below, the correct password is 
+Note that we only consider single-character changes when trying
+uppercase/lowercase variants of the guesses (i.e. we DON'T try all possible
+capitalizations of the string): In the example below, the correct password is
 NOT found because going from `SECRET` to `seCret` would require 5 characters to be changed.
 
 ```
@@ -133,15 +89,16 @@ Did not find a matching password
 To help testing your PA, we are providing you with a file containing 3 million real paintext passwords famously found a data breach of the [RockYou
 social network](https://en.wikipedia.org/wiki/RockYou) in 2009. You can use the password file present in the `ieng6` servers by reading it into `pwcrack` using
 the following commandline if you're in Joe's section:
+
 ```
 $./pwcrack a2c3b02cb22af83d6d1ead1d4e18d916599be7c2ef2f017169327df1f7c844fd < /home/linux/ieng6/cs29fa24/pa2/rockyou_clean.txt
 ```
 
 and the following command if you're in Aaron's section:
+
 ```
 $./pwcrack a2c3b02cb22af83d6d1ead1d4e18d916599be7c2ef2f017169327df1f7c844fd < /home/linux/ieng6/cs29fa24b/pa2/rockyou_clean.txt
 ```
-
 
 Note: these are real human-generated passwords, so they may contain profane words (and offensive concepts). We are providing a
 censored version of the RockYou password list. Our filtering methodology was to remove any passwords that matched a widely-used 2,800 profane
@@ -151,6 +108,7 @@ all offensive passwords from the list.
 ## Useful Tools
 
 You will be using [`openssl`](https://docs.openssl.org/3.1/man3/SHA256_Init) library for this PA. This requires an extra argument for compiling your code:
+
 ```
 gcc <your .c file> -o <output name> -lcrypto
 ```
@@ -161,9 +119,8 @@ The relevant function from that library is `SHA256`. You can follow the link abo
 SHA256(const unsigned char data[], uint64_t count, unsigned char md_buf[]);
 ```
 
-The `data` parameter is *not* assumed to be a C string. That is, it may or may not be null terminated, `SHA256` won't check. The hash function will operate on however many bytes are specified by `count`. So, if passing a C string, the caller of `SHA256` is responsible for using something like `strlen` to calculate `count` and provide it.
+The `data` parameter is _not_ assumed to be a C string. That is, it may or may not be null terminated, `SHA256` won't check. The hash function will operate on however many bytes are specified by `count`. So, if passing a C string, the caller of `SHA256` is responsible for using something like `strlen` to calculate `count` and provide it.
 The `md_buf` argument is where the hash gets stored, and it is assumed to be at least 32 bytes long (SHA256 has a fixed output size which is 32 bytes (256 bits)).
-
 
 Here's a short code snippet that shows how to use it:
 
@@ -199,7 +156,7 @@ Example:
 [cs29fa24@ieng6-201]:~:201$ gcc sha256.c -o sha256 -lcrypto
 [cs29fa24@ieng6-201]:~:204$ ./sha256 seCret
 a2c3b02cb22af83d6d1ead1d4e18d916599be7c2ef2f017169327df1f7c844fd
-162 195 176 44 178 42 248 61 109 30 173 29 78 24 217 22 89 155 231 194 239 47 1 113 105 50 125 241 247 200 68 253 
+162 195 176 44 178 42 248 61 109 30 173 29 78 24 217 22 89 155 231 194 239 47 1 113 105 50 125 241 247 200 68 253
 ```
 
 If you want to calculate a sha256 hash yourself you can use that program, there's also a command-line program called `openssl` that can do this from standard input:
@@ -207,10 +164,9 @@ If you want to calculate a sha256 hash yourself you can use that program, there'
 ```
 [cs29fa24@ieng6-201]:~:203$ echo -n seCret | openssl dgst -sha256
 (stdin)= a2c3b02cb22af83d6d1ead1d4e18d916599be7c2ef2f017169327df1f7c844fd
-``` 
+```
 
 This also generates a SHA256 hash string of `seCret`. Note that both examples show 64 characters of hex values. 2 hex characters are used to represent one byte, so 64 hex characters are used to represent 32 bytes. (The `-n` argument to `echo` means “don't add a newline.” Without this, we'd get the hash of `seCret\n`)
-
 
 ## Milestones and Incremental Testing
 
@@ -222,13 +178,11 @@ The first milestone has you work on handling user input, which is given as a 64-
 
 #### `hex_to_byte`
 
-
 ```
 uint8_t hex_to_byte(unsigned char h1, unsigned char h2);
 ```
 
 Given two hex characters in ASCII (0-9, a-f) representing a two-digit hexadecimal number, return the integer they represent. `h1` is the most significant digit, `h2` the least.
-
 
 ```
 assert(hex_to_byte('c', '8') == 200);
@@ -251,7 +205,6 @@ unsigned char hash[32];
 hexstr_to_hash(hexstr, hash);
 // hash should now contain { 0xa2, 0xc3, 0xb0, 0x2c, ... }
 ```
-
 
 #### `main` for Milestone 1
 
@@ -301,14 +254,11 @@ int main(int argc, char** argv) {
 }
 ```
 
-
 ### Functions - Milestone 2
-
 
 #### `check_password`
 
 Given a password as a C string and a SHA256 hash as an array of bytes, check the hash of the password against the `given_hash`. Return `1` if they match, `0` if not.
-
 
 ```
 int8_t check_password(char password[], unsigned char given_hash[32])
@@ -320,7 +270,6 @@ int8_t check_password(char password[], unsigned char given_hash[32])
 // assert(check_password("password", given_hash) == 1);
 // assert(check_password("wrongpass", given_hash) == 0);
 ```
-
 
 #### `main` Function Milestone 2
 
@@ -347,7 +296,6 @@ Did not find a matching password
 
 For testing milestone 2, using `assert`s in a test function (as suggested in Milestone 1) is a good way to ensure you are correctly matching passwords to their hashes.
 
-
 ### Functions - Milestone 3
 
 #### `crack_password`
@@ -372,7 +320,6 @@ Returns `1` on match and `0` if no match. In addition, if `1` is returned, the `
 
 With this function, you should be able to complete the original task.
 
-
 ## Design Questions
 
 1. Real password crackers try many more variations than just uppercasing and lowercasing. Do a little research on password cracking and suggest at least 2 other ways to vary a password to crack it. Describe them both, and for each, write a sentence or two about what modifications you would make to your code to implement them.
@@ -382,6 +329,6 @@ With this function, you should be able to complete the original task.
 ## Handin
 
 - Any .c files you wrote (can be one file or many; it's totally reasonable to only have one). We will run `gcc *.c -o pwcrack -lcrypto` to compile your code, so you should make sure it works when we do that.
-- A file DESIGN.md (with exactly that name) containing the answers to the design questions
+- A file **DESIGN.md** (with exactly that name) containing the answers to the design questions
 
 You will hand in your code to the `pa2` assignment on Gradescope. An autograder will give you information about if your code compiles and works on some simple examples like the ones from this writeup. Your implementation and design questions will be graded after the deadline with a mix of automatic and manual grading.
