@@ -1,4 +1,4 @@
-# PA2 - Hashing and Passwords: Due 10/23 at 11:59pm - [Github Classroom Link](https://classroom.github.com/a/Lo9vRhLG)
+# PA2 - Hashing and Passwords: Due 10/23 at 11:59pm - [Github Classroom Link](todo)
 
 [Cryptographic hash functions](https://en.wikipedia.org/wiki/Cryptographic_hash_function) take an input of arbitrary length and produces a fixed length output. The special features are that the outputs are _deterministic_ (the same input always generates the same output) and yet the outputs are apparently “random” – two similar inputs are likely to produce very different outputs, and it's difficult to determine the input by looking at the ouput.
 
@@ -11,7 +11,7 @@ In some cases, password cracking can [exploit the structure](https://en.wikipedi
 
 ## Getting Started
 
-To get started, visit the [Github Classroom](https://classroom.github.com/a/Lo9vRhLG) assignment link. Select your username from the list (or if you don't see it, you can skip and use your Github username). A repository will be created for you to use for your work. This PA should be completed on the `ieng6` server. Refer [this](https://ucsd-cse29.github.io/fa25/week1/lab1.html#logging-into-ieng6) section in Week 1's Lab for instructions on logging in to your account on `ieng6` and working with files on the server.
+To get started, visit the [Github Classroom](TODO) assignment link. Select your username from the list (or if you don't see it, you can skip and use your Github username). A repository will be created for you to use for your work. This PA should be completed on the `ieng6` server. Refer [this](https://ucsd-cse29.github.io/fa25/week1/lab1.html#logging-into-ieng6) section in Week 1's Lab for instructions on logging in to your account on `ieng6` and working with files on the server.
 
 **Note** - The autograder uses the C11 standard of the C programming language.
 
@@ -86,7 +86,9 @@ SECRET
 Did not find a matching password
 ```
 
-To help testing your PA, we are providing you with a file containing 3 million real paintext passwords famously found a data breach of the [RockYou
+TODO: add this to the starter code
+
+To help testing your PA, we are providing you with a file containing 3 million real plaintext passwords famously found a data breach of the [RockYou
 social network](https://en.wikipedia.org/wiki/RockYou) in 2009. You can use the password file present in the `ieng6` servers by reading it into `pwcrack` using
 the following commandline if you're in Joe's section:
 
@@ -102,7 +104,7 @@ $./pwcrack a2c3b02cb22af83d6d1ead1d4e18d916599be7c2ef2f017169327df1f7c844fd < /h
 
 Note: these are real human-generated passwords, so they may contain profane words (and offensive concepts). We are providing a
 censored version of the RockYou password list. Our filtering methodology was to remove any passwords that matched a widely-used 2,800 profane
-word list. If you read the conents of the password file, note that you are doing so at your own risk, as we can not guarantee that we removed
+word list. If you read the contents of the password file, note that you are doing so at your own risk, as we can not guarantee that we removed
 all offensive passwords from the list.
 
 ## Useful Tools
@@ -115,7 +117,7 @@ gcc <your .c file> -o <output name> -lcrypto
 
 The relevant function from that library is `SHA256`. You can follow the link above to see its official type; in terms we've been using in class its type is:
 
-```
+``` c
 SHA256(const unsigned char data[], uint64_t count, unsigned char md_buf[]);
 ```
 
@@ -124,7 +126,7 @@ The `md_buf` argument is where the hash gets stored, and it is assumed to be at 
 
 Here's a short code snippet that shows how to use it:
 
-```
+``` c
 #include <stdint.h>
 #include <string.h>
 #include <stdlib.h>
@@ -168,58 +170,53 @@ If you want to calculate a sha256 hash yourself you can use that program, there'
 
 This also generates a SHA256 hash string of `seCret`. Note that both examples show 64 characters of hex values. 2 hex characters are used to represent one byte, so 64 hex characters are used to represent 32 bytes. (The `-n` argument to `echo` means “don't add a newline.” Without this, we'd get the hash of `seCret\n`)
 
-## Milestones and Incremental Testing
+## Using the Problem Set for your PA
 
-We provide some milestones for you to work incrementally. We also describe some testing strategies here that might help you do your work one function at a time.
+Most of the needed functionality for the PA is in the problem set problems! So part of your workflow for this PA should be to move code over from the appropriate part of your problem set and into your PA code.
 
-### Functions - Milestone 1
+You can and should save your work by using `git` commits (if you're comfortable
+with that), or even just saving copies of your `.c` file when you hit important
+milestones. We may ask to see your work from an earlier milestone if you ask us
+for help on a function from a later one.
 
-The first milestone has you work on handling user input, which is given as a 64-byte ASCII string of hex characters. In order to compare this to hash values, it will be useful to convert this to the numeric bytes representing the hash value.
+### Milestone 1
 
-#### `hex_to_byte`
+Here are the functions you should copy over and test first, as well as the recommended ways to test them.
 
-```
+The problem set may not _exactly_ match each function, so make sure you understand the logic and how to modify it accordingly.
+
+- `hex_to_byte`
+
+``` c
 uint8_t hex_to_byte(unsigned char h1, unsigned char h2);
 ```
+=
 
-Given two hex characters in ASCII (0-9, a-f) representing a two-digit hexadecimal number, return the integer they represent. `h1` is the most significant digit, `h2` the least.
-
-```
+``` c
 assert(hex_to_byte('c', '8') == 200);
 assert(hex_to_byte('0', '3') == 3);
 assert(hex_to_byte('0', 'a') == 10);
 assert(hex_to_byte('1', '0') == 16);
 ```
 
-#### `hexstr_to_hash`
+- `hexstr_to_hash`
 
-```
+``` c
 void hexstr_to_hash(char hexstr[], unsigned char hash[32])
 ```
 
 Given 64 hex characters in ASCII (e.g. user input), convert it to a 32-byte array corresponding to the hex values. Assume the first 64 bytes (exactly) of hex contain the input data.
 
-```
+``` c
 char hexstr[64] = "a2c3b02cb22af83d6d1ead1d4e18d916599be7c2ef2f017169327df1f7c844fd";
 unsigned char hash[32];
 hexstr_to_hash(hexstr, hash);
 // hash should now contain { 0xa2, 0xc3, 0xb0, 0x2c, ... }
 ```
 
-#### `main` for Milestone 1
+- `main`
 
 At this point, you aren't yet reading any input from stdin, but you can verify that you can read the command-line argument. It could be useful at this point to check your work by printing a message that verifies you correctly read the input.
-
-For example:
-
-```
-int main(int argc, char** argv) {
-  unsigned char hash[32];
-  hexstr_to_hash(argv[1], hash);
-  printf("User input as hash: \n");
-  // print out hash (you can use our main method from the SHA256 example)
-}
-```
 
 #### Testing Milestone 1
 
@@ -227,7 +224,7 @@ There are a few ways to test Milestone 1. One is with `assert`s as shown above (
 
 A way to organize this in your code could be to write individual test functions, and call them conditionally at the top of the `main` function:
 
-```
+``` c
 #include <assert.h>
 
 void test_hex_to_byte() {
@@ -254,13 +251,13 @@ int main(int argc, char** argv) {
 }
 ```
 
-### Functions - Milestone 2
+### Milestone 2
 
-#### `check_password`
+- `check_password`
 
 Given a password as a C string and a SHA256 hash as an array of bytes, check the hash of the password against the `given_hash`. Return `1` if they match, `0` if not.
 
-```
+``` c
 int8_t check_password(char password[], unsigned char given_hash[32])
 
 // Example:
@@ -271,7 +268,7 @@ int8_t check_password(char password[], unsigned char given_hash[32])
 // assert(check_password("wrongpass", given_hash) == 0);
 ```
 
-#### `main` Function Milestone 2
+- `main`
 
 With `check_password`, you can now check for exact matches of passwords given on `stdin` with the hash the user gave. You should be able to get this test working:
 
@@ -296,11 +293,11 @@ Did not find a matching password
 
 For testing milestone 2, using `assert`s in a test function (as suggested in Milestone 1) is a good way to ensure you are correctly matching passwords to their hashes.
 
-### Functions - Milestone 3
+### Milestone 3
 
-#### `crack_password`
+- `crack_password`
 
-```
+``` c
 int8_t crack_password(char password[], unsigned char given_hash[])
 ```
 
@@ -326,9 +323,15 @@ With this function, you should be able to complete the original task.
 
 2. How much working memory is needed to store all of the variables needed to execute the password cracker? Based on your response would you say that a password cracker is more memory-limited or is it more limited by how fast the process can run the code?
 
-## Handin
+## What to Hand In
 
 - Any .c files you wrote (can be one file or many; it's totally reasonable to only have one). We will run `gcc *.c -o pwcrack -lcrypto` to compile your code, so you should make sure it works when we do that.
 - A file **DESIGN.md** (with exactly that name) containing the answers to the design questions
 
 You will hand in your code to the `pa2` assignment on Gradescope. An autograder will give you information about if your code compiles and works on some simple examples like the ones from this writeup. Your implementation and design questions will be graded after the deadline with a mix of automatic and manual grading.
+
+## Resources and Policy
+
+Refer to [the policies on assignments](https://ucsd-cse29.github.io/fa25/#assignments-and-academic-integrity) for working with others or appropriate use of tools like ChatGPT or Github Copilot.
+
+You can use any code from class, lab, or discussion in your work.
