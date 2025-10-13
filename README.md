@@ -190,7 +190,6 @@ The problem set may not _exactly_ match each function, so make sure you understa
 ``` c
 uint8_t hex_to_byte(unsigned char h1, unsigned char h2);
 ```
-=
 
 ``` c
 assert(hex_to_byte('c', '8') == 200);
