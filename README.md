@@ -86,22 +86,6 @@ SECRET
 Did not find a matching password
 ```
 
-TODO: add this to the starter code
-
-To help testing your PA, we are providing you with a file containing 500 real plaintext passwords famously found a data breach of the [RockYou
-social network](https://en.wikipedia.org/wiki/RockYou) in 2009. You can use the password file present in the starter code by reading it into `pwcrack` using
-the following commandline:
-
-```
-$./pwcrack a2c3b02cb22af83d6d1ead1d4e18d916599be7c2ef2f017169327df1f7c844fd < rockyou_small.txt
-```
-
-
-Note: these are real human-generated passwords, so they may contain profane words (and offensive concepts). We are providing a
-censored version of the RockYou password list. Our filtering methodology was to remove any passwords that matched a widely-used 2,800 profane
-word list. If you read the contents of the password file, note that you are doing so at your own risk, as we can not guarantee that we removed
-all offensive passwords from the list.
-
 ## Useful Tools
 
 You will be using [`openssl`](https://docs.openssl.org/3.1/man3/SHA256_Init) library for this PA. This requires an extra argument for compiling your code:
@@ -310,6 +294,55 @@ Returns `1` on match and `0` if no match. In addition, if `1` is returned, the `
 ```
 
 With this function, you should be able to complete the original task.
+
+## Final Testing
+
+To help testing your PA, we are providing you with a file containing 3 million real plaintext passwords famously found a data breach of the [RockYou
+social network](https://en.wikipedia.org/wiki/RockYou) in 2009. You can use the password file present in the `ieng6` servers by reading it into `pwcrack` using
+the following commandline if you're in Joe's section:
+
+```
+$./pwcrack a2c3b02cb22af83d6d1ead1d4e18d916599be7c2ef2f017169327df1f7c844fd < /home/linux/ieng6/CSE29_FA25_A00/public/pa2/rockyou_clean.txt
+```
+
+and the following command if you're in Aaron's section:
+
+```
+$./pwcrack a2c3b02cb22af83d6d1ead1d4e18d916599be7c2ef2f017169327df1f7c844fd < /home/linux/ieng6/CSE29_FA25_B00/public/pa2/rockyou_clean.txt
+```
+
+Note: these are real human-generated passwords, so they may contain profane words (and offensive concepts). We are providing a
+censored version of the RockYou password list. Our filtering methodology was to remove any passwords that matched a widely-used 2,800 profane
+word list. If you read the contents of the password file, note that you are doing so at your own risk, as we can not guarantee that we removed
+all offensive passwords from the list.
+
+### Staff Passwords
+
+All staff members have a secret password, and it is your job to guess it! We will give you the hash of the password, and using the rockyou text, try to find each staff members' password.
+
+
+## Staff Password Hashes
+
+Below are the SHA256 hashes for each staff member's password. Use your `pwcrack` program and the provided password list to try and discover each password.
+
+- Joe: 20f98ae6a6a9a92ec35aac32c886d9740ef79981220fef4c99cf4f40988a4efa
+- Aaron: 4a3a6f674cc8b747cb2d88673e9c8793bc1d345482d528f7773fdc79a831c3d4
+- Kruti: d495f914f0de80d3d5c6a7fcbb4dee7cfc778ff8344daa7ee8969957f5c84c78
+- Reese: 58fc0705c8790a9fa83ecb2ccdca9c6785d5f38f9ddaeea8c73b3b719155eef5
+- Rachel: df073edaf05716720adf0db29f5b70bae528aa5c0f1d992c396a1d12e0c21012
+- Andrew: 8976bb3b64a2373cb15cf8a666a8985670f837413fb22b1bd54e505f89d0929f
+- Alex: 67ed58bc51c3fed497952300a0e194bdb08530b93ccb1b19e505090ea991e923
+- Janet: b4c58e57138b87c5a1b25baa39ae95f0690d16a08f8fe37e42b08d504add6d03
+- Elena: e1d03258d633ed07a49a3b2feb4d0b739d0d0d2b3d972d16c6b6295bb4aeb5d0
+- Anya: 59d927184680758dc8b3ea7e8922d8f185d096ac57afdbab9fcc10048439ec67
+- Sam: 71dd256f3ada5ca87a6d038f0b93691e8260d314c5dabc627f9bfbdc7c7d1ff7
+- Miles: 3a9c09a64bb5a3e2f7cda61b034bdffb35088a9f771bed332d0ad9990f68100c
+- Travis: f4d853a07583874c6c6d28291c7020867d42009b5cde7bad50ec8e1e9a723e93
+
+### Extra Fun!
+
+You might have trouble with a couple of these passwords. For no additional credit, just fun :), you can see if you can guess the passwords based off of the class. Try to use your program to try all cases of letters!
+
 
 ## Design Questions
 
