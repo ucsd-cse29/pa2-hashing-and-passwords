@@ -1,13 +1,18 @@
 # PA2 - Hashing and Passwords: Due 10/23 at 11:59pm - [Github Classroom Link](todo)
 
-[Cryptographic hash functions](https://en.wikipedia.org/wiki/Cryptographic_hash_function) take an input of arbitrary length and produces a fixed length output. The special features are that the outputs are _deterministic_ (the same input always generates the same output) and yet the outputs are apparently “random” – two similar inputs are likely to produce very different outputs, and it's difficult to determine the input by looking at the ouput.
+[Cryptographic hash functions](https://en.wikipedia.org/wiki/Cryptographic_hash_function) take an input of arbitrary length and produces a fixed length output. There are several important formal definitions, for our understanding a few key properties are useful to state:
 
-A common application of hashing is in storing passwords. Many systems store only the hash of a user's password along with their username. This ensures that even if someone gains access to the stored data, users' actual passwords are not exposed. When a user types in a password on such a system, the password handling software grants access if the hash value generated from the user's entry matches the hash stored in the password database.
+- _Determinism_: the same input always generates the same output (it is not, for example, random)
+- _One-way_:  it's effectively impossible to determine or guess the input solely based on the ouput
+- _Collision Resistance_/_Avalanche Effect_: similar but distinct inputs produce very different outputs
 
-We said above that it is _difficult_ to determine an input given an output. [Password cracking](https://en.wikipedia.org/wiki/Password_cracking) is a family of techniques for accomplishing this difficult (but possible!) task.
-That is, let's say we have access to a user's password _hash_ only. Can we figure out their password? We could then use it to log in, and it may also be shared across their accounts which we could also access.
+A common application of hashing is in storing passwords. Many systems store only the hash of a user's password along with their username. This ensures that even if someone gains access to the stored data, users' actual passwords are not exposed (because the hash function is _one-way_!). When a user types in a password on such a system, it gets the _hash_ of the password and checks that against the stored hash (because the hash is _deterministic_ and _collision resistant_, this checks the correct password, and _only_ the correct password).
 
-In some cases, password cracking can [exploit the structure](https://en.wikipedia.org/wiki/MD5#Security) of a hash function; this is a topic for a cryptography class. In our case, we will take a more brute-force approach: trying variations on existing known passwords, under the assumption that [many passwords are easy to guess](https://en.wikipedia.org/wiki/List_of_the_most_common_passwords).
+We said above that it is “effectively impossible to determine or guess an input solely based an output”. [Password cracking](https://en.wikipedia.org/wiki/Password_cracking) is a family of techniques for accomplishing this difficult (but possible!) task based on exploiting common patterns in how users choose passwords.
+That is, let's say we have access to a user's password _hash_ only. Can we figure out their password?
+
+In some cases, password cracking can [exploit the structure](https://en.wikipedia.org/wiki/MD5#Security) of a hash function; this is a topic for a cryptography class, and we won't do that.
+In our case, we will take a more brute-force approach: trying variations on existing known passwords, under the assumption that [many passwords are easy to guess](https://en.wikipedia.org/wiki/List_of_the_most_common_passwords). If a user has a common password or a close variant of one, we can compute the hash and check it!
 
 ## Getting Started
 
